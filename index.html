@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#c084fc" />
+  <title>A Special Question 💜</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- html2canvas for download feature -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  ANIMATED BACKGROUND LAYER                 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="hearts-container" id="hearts-container" aria-hidden="true"></div>
+  <div class="sparkles-container" id="sparkles-container" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCREEN WRAPPER                            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <main id="app" role="main">
+
+    <!-- ─── SCREEN 1: WELCOME ─────────────────── -->
+    <section class="screen is-active" id="screen-welcome" data-screen="1" aria-label="Welcome">
+      <div class="card glass-card welcome-card">
+        <div class="card-glow" aria-hidden="true"></div>
+        <p class="eyebrow">for you 💜</p>
+        <h1 class="title typewriter" id="welcome-title">I have something special to ask you ❤️</h1>
+        <p class="subtitle" id="welcome-subtitle">I've been wanting to ask this for a while...</p>
+        <button
+          class="btn btn-primary btn-hidden"
+          id="welcome-btn"
+          aria-label="Continue to the next screen"
+        >
+          Continue
+        </button>
+      </div>
+    </section>
+
+    <!-- ─── SCREEN 2: QUESTION ────────────────── -->
+    <section class="screen" id="screen-question" data-screen="2" aria-label="Date question">
+      <div class="card glass-card question-card">
+        <div class="card-glow" aria-hidden="true"></div>
+        <div class="question-heart" aria-hidden="true">❤️</div>
+        <h2 class="title" id="question-title">Would you go on a date with me?</h2>
+        <div class="question-buttons" id="question-buttons">
+          <button class="btn btn-yes" id="yes-btn" aria-label="Yes, I'll go on a date">Yes!</button>
+          <button class="btn btn-no"  id="no-btn"  aria-label="No button (try to click it!)">No</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SCREEN 3: FOOD ────────────────────── -->
+    <section class="screen" id="screen-food" data-screen="3" aria-label="Food selection">
+      <div class="screen-inner">
+        <h2 class="screen-title">What would you like to eat? 🍽️</h2>
+        <p class="screen-subtitle">Pick your favourite</p>
+        <div class="grid-cards" id="food-grid" role="listbox" aria-label="Food options">
+          <div class="option-card" data-value="Sushi"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍣</span><span class="card-label">Sushi</span></div>
+          <div class="option-card" data-value="Pizza"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍕</span><span class="card-label">Pizza</span></div>
+          <div class="option-card" data-value="Pasta"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍝</span><span class="card-label">Pasta</span></div>
+          <div class="option-card" data-value="Steak"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🥩</span><span class="card-label">Steak</span></div>
+          <div class="option-card" data-value="Burger"    role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍔</span><span class="card-label">Burger</span></div>
+          <div class="option-card" data-value="Ramen"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍜</span><span class="card-label">Ramen</span></div>
+          <div class="option-card" data-value="Tacos"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌮</span><span class="card-label">Tacos</span></div>
+          <div class="option-card" data-value="Coffee"    role="option" tabindex="0" aria-selected="false"><span class="card-emoji">☕</span><span class="card-label">Coffee</span></div>
+          <div class="option-card" data-value="Milk Tea"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🧋</span><span class="card-label">Milk Tea</span></div>
+          <div class="option-card" data-value="Dessert"   role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍰</span><span class="card-label">Dessert</span></div>
+          <div class="option-card" data-value="Fried Chicken" role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍗</span><span class="card-label">Fried Chicken</span></div>
+          <div class="option-card" data-value="Ice Cream" role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🍦</span><span class="card-label">Ice Cream</span></div>
+        </div>
+        <button class="btn btn-primary btn-continue" id="food-btn" disabled aria-disabled="true">Continue</button>
+      </div>
+    </section>
+
+    <!-- ─── SCREEN 4: ACTIVITY ────────────────── -->
+    <section class="screen" id="screen-activity" data-screen="4" aria-label="Activity selection">
+      <div class="screen-inner">
+        <h2 class="screen-title">What should we do together? 🎉</h2>
+        <p class="screen-subtitle">Choose your adventure</p>
+        <div class="grid-cards" id="activity-grid" role="listbox" aria-label="Activity options">
+          <div class="option-card" data-value="Movie"       role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🎬</span><span class="card-label">Movie</span></div>
+          <div class="option-card" data-value="Bowling"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🎳</span><span class="card-label">Bowling</span></div>
+          <div class="option-card" data-value="Beach"       role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🏖️</span><span class="card-label">Beach</span></div>
+          <div class="option-card" data-value="Cafe"        role="option" tabindex="0" aria-selected="false"><span class="card-emoji">☕</span><span class="card-label">Cafe</span></div>
+          <div class="option-card" data-value="Arcade"      role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🕹️</span><span class="card-label">Arcade</span></div>
+          <div class="option-card" data-value="Shopping"    role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🛍️</span><span class="card-label">Shopping</span></div>
+          <div class="option-card" data-value="Museum"      role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🏛️</span><span class="card-label">Museum</span></div>
+          <div class="option-card" data-value="Picnic"      role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🧺</span><span class="card-label">Picnic</span></div>
+          <div class="option-card" data-value="Sunset Walk" role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌅</span><span class="card-label">Sunset Walk</span></div>
+          <div class="option-card" data-value="Theme Park"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🎡</span><span class="card-label">Theme Park</span></div>
+          <div class="option-card" data-value="Night Drive" role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🚗</span><span class="card-label">Night Drive</span></div>
+          <div class="option-card" data-value="Karaoke"     role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🎤</span><span class="card-label">Karaoke</span></div>
+        </div>
+        <button class="btn btn-primary btn-continue" id="activity-btn" disabled aria-disabled="true">Continue</button>
+      </div>
+    </section>
+
+    <!-- ─── SCREEN 5: CALENDAR ───────────────── -->
+    <section class="screen" id="screen-calendar" data-screen="5" aria-label="Date picker">
+      <div class="screen-inner">
+        <h2 class="screen-title">When should we meet? 📅</h2>
+        <p class="screen-subtitle">Pick your perfect day</p>
+        <div class="calendar-wrapper glass-card" id="calendar-wrapper">
+          <div class="calendar-header">
+            <button class="cal-nav" id="cal-prev" aria-label="Previous month">‹</button>
+            <span class="cal-month-label" id="cal-month-label" aria-live="polite"></span>
+            <button class="cal-nav" id="cal-next" aria-label="Next month">›</button>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span>
+            <span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="cal-grid" id="cal-grid" role="grid" aria-label="Calendar dates"></div>
+        </div>
+        <button class="btn btn-primary btn-continue" id="calendar-btn" disabled aria-disabled="true">Continue</button>
+      </div>
+    </section>
+
+    <!-- ─── SCREEN 6: TIME ───────────────────── -->
+    <section class="screen" id="screen-time" data-screen="6" aria-label="Time selection">
+      <div class="screen-inner">
+        <h2 class="screen-title">What time works best? ⏰</h2>
+        <p class="screen-subtitle">Choose the perfect hour</p>
+        <div class="grid-cards grid-cards--time" id="time-grid" role="listbox" aria-label="Time options">
+          <div class="option-card" data-value="11 AM" role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌤️</span><span class="card-label">11 AM</span></div>
+          <div class="option-card" data-value="12 PM" role="option" tabindex="0" aria-selected="false"><span class="card-emoji">☀️</span><span class="card-label">12 PM</span></div>
+          <div class="option-card" data-value="1 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌞</span><span class="card-label">1 PM</span></div>
+          <div class="option-card" data-value="2 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">⛅</span><span class="card-label">2 PM</span></div>
+          <div class="option-card" data-value="5 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌆</span><span class="card-label">5 PM</span></div>
+          <div class="option-card" data-value="6 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌇</span><span class="card-label">6 PM</span></div>
+          <div class="option-card" data-value="7 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌆</span><span class="card-label">7 PM</span></div>
+          <div class="option-card" data-value="8 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌃</span><span class="card-label">8 PM</span></div>
+          <div class="option-card" data-value="9 PM"  role="option" tabindex="0" aria-selected="false"><span class="card-emoji">🌙</span><span class="card-label">9 PM</span></div>
+        </div>
+        <button class="btn btn-primary btn-continue" id="time-btn" disabled aria-disabled="true">Continue</button>
+      </div>
+    </section>
+
+    <!-- ─── SCREEN 7: FINAL ──────────────────── -->
+    <section class="screen" id="screen-final" data-screen="7" aria-label="Final celebration">
+      <div class="final-bg-burst" aria-hidden="true"></div>
+      <div class="card glass-card final-card">
+        <div class="card-glow card-glow--bright" aria-hidden="true"></div>
+        <div class="final-emoji" aria-hidden="true">❤️</div>
+        <h2 class="final-title" id="final-title">It's a Date!</h2>
+        <div class="final-details" id="final-details" aria-label="Date summary">
+          <div class="detail-row"><span class="detail-icon">🍽️</span><span class="detail-text" id="final-food">—</span></div>
+          <div class="detail-row"><span class="detail-icon">🎉</span><span class="detail-text" id="final-activity">—</span></div>
+          <div class="detail-row"><span class="detail-icon">📅</span><span class="detail-text" id="final-date">—</span></div>
+          <div class="detail-row"><span class="detail-icon">⏰</span><span class="detail-text" id="final-time">—</span></div>
+        </div>
+        <p class="final-message" id="final-message">I can't wait to spend this special day with you ❤️</p>
+        <div class="final-buttons">
+          <button class="btn btn-primary" id="download-btn">Download Invitation</button>
+          <button class="btn btn-secondary" id="restart-btn">Start Again</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Confetti layer (injected by JS) -->
+  <div class="confetti-container" id="confetti-container" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
