@@ -6,7 +6,7 @@
 /* ═══════════════════════════════════════════════════════════
    STATE
    ═══════════════════════════════════════════════════════════ */
-const PERSON_NAME = 'Name';
+const PERSON_NAME = 'Francine';
 
 const state = {
   currentScreen: 1,
